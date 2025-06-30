@@ -6,11 +6,28 @@ import CoursesPage from "./pages/CoursesPage"
 import ContactPage from "./pages/ContactPage"
 import NotfoundPage from "./pages/NotFoundPage"
 import './styles/Pages.css'
+import ChatbotComponent from "./components/Chatbot/ChatbotComponents"
+import { useState } from "react"
+import DeveloperInfoPopup from "./components/DeveloperInfo/DeveloperInfoPopup"
 
 const App =() =>
 {
+  const [showPopup, setShowPopup] = useState(true);
+  const handleClosePopup = () => {
+    setShowPopup(false);
+  };
   return(
     <>
+    <div>
+        {/* Your main application content */}
+        <DeveloperInfoPopup
+          show={showPopup}
+          onClose={handleClosePopup}
+          studentName="Dnyaneshwari Patil"
+          studentPhotoUrl="/Images/Dnyaneshwari.jpeg" // Path to their photo
+          uniqueMessage="Learned so much during this OJT! This app showcases my independent coding and deployment skills"
+        />
+      </div>
     
    <Router>
         <Routes>
@@ -22,10 +39,13 @@ const App =() =>
             <Route path="/contact" element={<ContactPage/>}/>
             <Route path="/NotFound" element={<NotfoundPage/>}/>
         </Routes>
+        <ChatbotComponent/>
       </Router>
+
    
          </>
+
   )
 }
 
-export default App
+export default App;
